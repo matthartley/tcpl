@@ -8,8 +8,6 @@ main()
 {
 	int len;
 	char line[MAXLINE];
-	char longest[MAXLINE];
-	
 
 	while((len = getline(line, MAXLINE)) > 0)
 	{
