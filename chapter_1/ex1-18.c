@@ -1,8 +1,5 @@
 #include <stdio.h>
-
 #define MAXLINE 1000
-#define ALL_BLANK 1
-#define NOT_ALL_BLANK 0
 
 int getline(char line[], int maxline);
 
@@ -13,35 +10,37 @@ main()
     char line[MAXLINE];
     while ((len = getline(line, MAXLINE)) > 0)
     {
-        int i, blank;
-        blank = ALL_BLANK;
+        int i, blanks_seen, first_char,have_seen_char;
         i = len - 1;
+
+        have_seen_char = 0;
         while (i >= 0)
         {
-            if (line[i] == '\t' || line[i] == ' ' || line[i] == '\n' || line[i] == '\0')
+            if (!have_seen_char)
             {
-                if (line[i] != '\n')
+                if (line[i] == '\t' || line[i] == ' ' || line[i] == '\n')
                 {
                     line[i] = '\0';
                 }
+                else if (i == 0)
+                {
+                    line[i] == '\0';
+                }
                 else
                 {
-                    break;
+                    have_seen_char = 1;
                 }
-            }
-            else
-            {
-                blank = NOT_ALL_BLANK;
             }
             --i;
         }
 
-        if (!blank)
+        for (i = 0; i < len; ++i)
         {
-            for (i = 0; i < len; ++i)
-            {
-                printf("%c", line[i]);
-            }
+            printf("%c", line[i]);
+        }
+        if (line[0] != '\0')
+        {
+            printf("\n");
         }
     }
 }
